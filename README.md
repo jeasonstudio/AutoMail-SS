@@ -2,6 +2,8 @@
 Spy SS from some website And mail it to me
 自动爬取Shadowsocks账号密码并发送邮件给指定名单。
 
+具体相关请联系[me@jeasonstudio.cn](mailto:me@jeasonstudio.cn)
+
 ## 功能
 
  - 自动从免费ShadowSocks账号提供站点：[http://ishadowsocks.me/](http://ishadowsocks.me/) 爬取ss账号，每六个小时更新一次。
