@@ -150,14 +150,14 @@ func sendReady(innerHTML string) {
 
 func main() {
 	myRes := analysisHTML()
-	tagHTML := "<html>
+	tagHTML := `<html>
 	<head>
 	<title>test</title>
 	</head>
 	<body>
-	<header>"+myRes["0-1"]+"</header>
+	<header>` + myRes["0-1"] + `</header>
 	</body>
-	</html>"
+	</html>`
 
 	fmt.Println(myRes["0-1"])
 	fmt.Println(tagHTML)
