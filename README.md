@@ -14,14 +14,14 @@ Spy SS from some website And mail it to me
 
 ## 使用
 
- 1. 安装GoLang编译器
- 2. 安装依赖：
+ - 安装GoLang编译器
+ - 安装依赖：
 ```go
 go get github.com/PuerkitoBio/goquery
 go get github.com/go-sql-driver/mysql
 ```
 
- 3. 修改相关数据库配置(前四项)
+ - 修改相关数据库配置(前四项)
 ```go
 // 数据库相关
 const (
@@ -34,19 +34,19 @@ const (
 )
 ```
 
- 4. 注册企业邮箱，修改相关配置
+ - 注册企业邮箱，修改相关配置
 ```go
 user := "admin@test.com"
 password := "password"
 host := "smtp.exmail.qq.com:25"
 ```
 
- 5. 编译
+ - 编译
   - 本机编译： `go build main.go`
   - 编译服务端(CentOs 6)：`GOOS=linux GOARCH=amd64 go build main.go`
 
- 6. 通过ftp放到服务器，借助supervisor等工具做进程守护。
+ - 通过ftp放到服务器，借助supervisor等工具做进程守护。
 
-## 协议
+## 开源协议
 
 [MIT](LICENSE)
