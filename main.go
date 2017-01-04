@@ -7,6 +7,7 @@ import (
 	"net/smtp"
 	"strconv"
 	"strings"
+	"time"
 
 	"fmt"
 
@@ -15,19 +16,11 @@ import (
 )
 
 // 数据库相关
-// const (
-// 	username   = "root"
-// 	password   = "root"
-// 	ip         = "127.0.0.1"
-// 	port       = "8889"
-// 	db_name    = "jeason_daily"
-// 	table_name = "mail_ss"
-// )
 const (
-	username   = "jeason"
-	password   = "Zjt13832913646"
-	ip         = "123.206.14.30"
-	port       = "3306"
+	username   = "root"
+	password   = "root"
+	ip         = "127.0.0.1"
+	port       = "8889"
 	db_name    = "jeason_daily"
 	table_name = "mail_ss"
 )
@@ -162,8 +155,12 @@ func sendReady(innerHTML string) {
 }
 
 func main() {
-	myRes := analysisHTML()
-	tagHTML := `<!DOCTYPE html>
+	fmt.Println("mail-SS start Now")
+
+	ticker := time.NewTicker(time.Hour * 6)
+	for _ = range ticker.C {
+		myRes := analysisHTML()
+		tagHTML := `<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -218,15 +215,6 @@ func main() {
 </body>
 
 </html>`
-
-	// fmt.Println(myRes["0-1"])
-	// fmt.Println(tagHTML)
-
-	sendReady(tagHTML)
-
-	// ticker := time.NewTicker(time.Hour * 6)
-	// for _ = range ticker.C {
-	// 	sendReady(tagHTML)
-
-	// }
+		sendReady(tagHTML)
+	}
 }
