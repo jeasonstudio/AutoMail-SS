@@ -15,11 +15,19 @@ import (
 )
 
 // 数据库相关
+// const (
+// 	username   = "root"
+// 	password   = "root"
+// 	ip         = "127.0.0.1"
+// 	port       = "8889"
+// 	db_name    = "jeason_daily"
+// 	table_name = "mail_ss"
+// )
 const (
-	username   = "root"
-	password   = "root"
-	ip         = "127.0.0.1"
-	port       = "8889"
+	username   = "jeason"
+	password   = "Zjt13832913646"
+	ip         = "123.206.14.30"
+	port       = "3306"
 	db_name    = "jeason_daily"
 	table_name = "mail_ss"
 )
@@ -82,8 +90,8 @@ func getUsersEmail() string {
 	i := 0
 	for rows.Next() {
 		var id int
-		var is_receive bool
-		var name, userid, user_email string
+		// var is_receive int8
+		var name, userid, user_email, is_receive string
 		rows.Scan(&id, &name, &userid, &user_email, is_receive)
 		fmt.Println("id:", id, "name:", name, "userid:", userid, "user_email:", user_email, "is_receive:", is_receive)
 
@@ -94,7 +102,7 @@ func getUsersEmail() string {
 	}
 	defer db.Close()
 
-	fmt.Println(arrTag)
+	// fmt.Println(arrTag)
 	resStr := ""
 
 	for j := 0; j < len(arrTag); j++ {
@@ -107,7 +115,8 @@ func getUsersEmail() string {
 		}
 	}
 
-	return resStr
+	// return resStr
+	return "" //todo
 }
 
 // 发送邮件
@@ -150,19 +159,65 @@ func sendReady(innerHTML string) {
 
 func main() {
 	myRes := analysisHTML()
-	tagHTML := `<html>
-	<head>
-	<title>test</title>
-	</head>
-	<body>
-	<header>` + myRes["0-1"] + `</header>
-	</body>
-	</html>`
+	tagHTML := `<!DOCTYPE html>
+<html lang="en">
 
-	fmt.Println(myRes["0-1"])
-	fmt.Println(tagHTML)
+<head>
+    <title>ShadowSocks auto spy</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        .con {
+            padding: 8px;
+            background-color: #eee;
+            margin: 8px;
+            border-radius: 5px;
+        }
+        p{
+            line-height: 1.1;
+            margin: 5px;
+        }
+        .footer{
+            display: block;
+            text-align: center;
+            margin-top: 30px;
+        }
+    </style>
+</head>
 
-	// sendReady(tagHTML)
+<body>
+    <div class="inner-content">
+        <div class="con">
+            <p>` + myRes["0-0"] + `</p>
+            <p>` + myRes["0-1"] + `</p>
+            <p>` + myRes["0-2"] + `</p>
+            <p>` + myRes["0-3"] + `</p>
+        </div>
+        <div class="con">
+            <p>` + myRes["1-0"] + `</p>
+            <p>` + myRes["1-1"] + `</p>
+            <p>` + myRes["1-2"] + `</p>
+            <p>` + myRes["1-3"] + `</p>
+        </div>
+        <div class="con">
+            <p>` + myRes["2-0"] + `</p>
+            <p>` + myRes["2-1"] + `</p>
+            <p>` + myRes["2-2"] + `</p>
+            <p>` + myRes["2-3"] + `</p>
+        </div>
+        <p> 退订请联系 <a href="mailto:me@jeasonstudio.cn">me@jeasonstudio.cn</a></p>
+    </div>
+    <div class="footer">
+        Copyright &copy; 2015-2016 JeasonStudio
+    </div>
+</body>
+
+</html>`
+
+	// fmt.Println(myRes["0-1"])
+	// fmt.Println(tagHTML)
+
+	sendReady(tagHTML)
 	// getUsersEmail()
 
 	// ticker := time.NewTicker(time.Hour * 6)
