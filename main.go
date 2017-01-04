@@ -90,19 +90,22 @@ func getUsersEmail() string {
 	i := 0
 	for rows.Next() {
 		var id int
-		// var is_receive int8
-		var name, userid, user_email, is_receive string
-		rows.Scan(&id, &name, &userid, &user_email, is_receive)
+		var is_receive int
+		var name, userid, user_email string
+		rows.Scan(&id, &name, &userid, &user_email, &is_receive)
 		fmt.Println("id:", id, "name:", name, "userid:", userid, "user_email:", user_email, "is_receive:", is_receive)
 
-		tagItem := strconv.Itoa(i)
+		if is_receive == 1 {
+			tagItem := strconv.Itoa(i)
+			arrTag[tagItem] = user_email
+			i++
+		} else {
+			continue
+		}
 
-		arrTag[tagItem] = user_email
-		i++
 	}
 	defer db.Close()
 
-	// fmt.Println(arrTag)
 	resStr := ""
 
 	for j := 0; j < len(arrTag); j++ {
@@ -114,9 +117,10 @@ func getUsersEmail() string {
 			resStr = resStr + arrTag[ii] + ";"
 		}
 	}
+	fmt.Println(resStr)
 
-	// return resStr
-	return "" //todo
+	return resStr
+	// return "" //todo
 }
 
 // 发送邮件
@@ -205,6 +209,7 @@ func main() {
             <p>` + myRes["2-2"] + `</p>
             <p>` + myRes["2-3"] + `</p>
         </div>
+		<p> 服务器密码六小时更换一次，每天0、6、12、18发送最新密码</p>
         <p> 退订请联系 <a href="mailto:me@jeasonstudio.cn">me@jeasonstudio.cn</a></p>
     </div>
     <div class="footer">
@@ -218,11 +223,9 @@ func main() {
 	// fmt.Println(tagHTML)
 
 	sendReady(tagHTML)
-	// getUsersEmail()
 
 	// ticker := time.NewTicker(time.Hour * 6)
 	// for _ = range ticker.C {
-	// 	// eMailTime := time.Now().Format("15:04")
 	// 	sendReady(tagHTML)
 
 	// }
