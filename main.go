@@ -136,7 +136,7 @@ func SendToMAIL(user, password, host, to, subject, body, mailtype string) error 
 // 准备发射
 func sendReady(innerHTML string) {
 	user := "mailbyjeason@jeasonstudio.cn"
-	password := "Admin12345"
+	password := "Admin54321"	//todofan
 	host := "smtp.exmail.qq.com:25"
 	to := getUsersEmail()
 	// fmt.Println(getUsersEmail())
